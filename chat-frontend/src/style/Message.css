@@ -1,0 +1,317 @@
+
+.message {
+  display: flex;
+  margin-bottom: 15px;
+  padding: 0; 
+  margin: 10px 0; 
+  max-width: 100%;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.message.assistant {
+  justify-content: flex-start;
+}
+
+.message-header {
+  display: flex;
+  align-items: flex-start; 
+}
+
+.assistant-logo {
+  font-size: 20px;
+  background-color: #2d2d2d; 
+  margin-right: 15px;
+  padding: 6px;
+  border-radius: 50%;
+  border: 1px solid #666666;
+  display: inline-block;
+  margin-top: 0px; 
+}
+
+.assistant-response {
+  flex: 1; 
+}
+
+.message-content {
+  background-color: #1f1f1f;
+  font-size: 16px;
+  color: #e0e0e0;
+  padding: 12px 18px; 
+  border-radius: 10px;
+  line-height: 1.8;
+  word-wrap: break-word;
+  max-width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.message.user .message-content {
+  background-color: #2d2d2d;
+  color: white;
+  margin-right: 0;
+}
+
+.message.assistant .message-content {
+  background-color: #1f1f1f;
+  margin-left: 0;
+}
+
+
+pre {
+  background-color: #2d2d2d;
+  padding: 12px;
+  border-radius: 0 0 12px 12px; 
+  color: #f8f8f2;
+  overflow-x: auto;
+   font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  margin: 0;
+  box-shadow: none; 
+  white-space: pre-wrap; 
+  word-wrap: break-word;
+}
+
+.message-content pre {
+  background-color: #1e1e1e; 
+  border-radius: 8px; 
+}
+
+
+
+
+.language-javascript code {
+  color: #f1e05a;
+}
+
+
+.language-python code {
+  color: #437cff;
+}
+
+
+.language-java code {
+  color: #b07219;
+}
+
+
+.language-ruby code {
+  color: #701516;
+}
+
+
+.language-go code {
+  color: #00ADD8;
+}
+
+
+.language-html code {
+  color: #e34c26;
+}
+
+
+.language-css code {
+  color: #563d7c;
+}
+
+
+.language-sql code {
+  color: #c586c0;
+}
+
+
+.language-cpp code {
+  color: #f34b7d;
+}
+
+
+.language-csharp code {
+  color: #178600;
+}
+
+
+.language-php code {
+  color: #4F5D95;
+}
+
+
+.language-typescript code {
+  color: #2b7489;
+}
+
+
+.language-shell code {
+  color: #89e051;
+}
+
+
+.language-swift code {
+  color: #ffac45;
+}
+
+
+.language-rust code {
+  color: #dea584;
+}
+
+
+.language-kotlin code {
+  color: #a97bff;
+}
+
+
+.language-perl code {
+  color: #0298c3;
+}
+
+
+.language-dart code {
+  color: #00B4AB;
+}
+
+
+.language-markdown code {
+  color: #083fa1;
+}
+
+
+.language-bash code {
+  color: #89e051;
+}
+
+
+.language-yaml code {
+  color: #cb171e;
+}
+
+
+.language-json code {
+  color: #e44b23;
+}
+
+
+.language-powershell code {
+  color: #4a6bff;
+}
+
+
+.language-sh code {
+  color: #a0e825;
+}
+
+
+.code-snippet-container {
+  position: relative; 
+  margin: 10px 0;
+  max-width: 100%; 
+}
+
+.code-language-title {
+  background-color: #2d2d2d;
+  color: #f8f8f2;
+  padding: 5px 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+
+.copy-button {
+  background-color: #1f1f1f;
+  color: #f8f8f2;
+  border: none;
+  border-radius: 5px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-left: auto; 
+   font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+}
+
+
+.copy-button:hover {
+  background-color: #000000;
+}
+
+.copy-status {
+  background-color: transparent;
+  color: #4caf50; 
+  font-size: 12px;
+  margin-left: auto; 
+   font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+}
+
+.copy-status .copy-icon {
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+
+
+pre {
+  background-color: #2d2d2d;
+  padding: 12px;
+  border-radius: 0 0 12px 12px;
+  color: #f8f8f2;
+  overflow-x: auto;
+   font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  margin-top: 0;
+  box-shadow: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.message-content pre {
+  background-color: #0b0b0b;
+  border-radius: 8px;
+}
+
+
+.code-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  background-color: #2d2d2d;
+  padding: 5px 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+}
+
+th, td {
+  border: 1px solid #444;
+  padding: 8px;
+  text-align: left;
+  background-color: #202020; 
+}
+
+th {
+  background-color: #3b3b3b; 
+  font-weight: bold;
+
+}
+
+tr:nth-child(even) {
+  background-color: #1f1f1f; 
+}

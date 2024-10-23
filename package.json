@@ -1,0 +1,20 @@
+{
+  "name": "sql2pyspark",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "install": "npm install --prefix ./chat-api/ && npm install --prefix ./chat-frontend/",
+    "start": "concurrently \"npm start --prefix ./chat-api\" \"npm start --prefix ./chat-frontend\""
+  },
+  "author": "Data Engineer",
+  "license": "Allianz",
+  "description": "A AI chat to convert SQL queries to PySpark DataFrame operations.",
+  "keywords": ["sql", "AI", "pyspark", "dataframe", "conversion"],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}

@@ -1,0 +1,16 @@
+services:
+  chat-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      AZURE_OPENAI_API_KEY: "570eb274117747dba2cbe5d36a756d4e"
+      AZURE_OPENAI_ENDPOINT: "https://openaiconvertsql.openai.azure.com"
+      AZURE_OPENAI_DEPLOYMENT_NAME: "gpt-4o"
+      AZURE_OPENAI_API_VERSION: "2024-06-01"
+      AZURE_OPENAI_PROMPT: ""
+      ALLOWED_FRONTEND_URL: "http://localhost:3000"
+    volumes:
+      - ./mnt:/app/mnt
