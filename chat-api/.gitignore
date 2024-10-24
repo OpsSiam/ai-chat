@@ -25,3 +25,7 @@ yarn-error.log*
 
 # db file
 /mnt/chat_history.db
+
+# docker
+docker-compose.yaml
+docker-compose.yml
