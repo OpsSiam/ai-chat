@@ -28,6 +28,8 @@ exports.chatHandler = async (req, res) => {
       content: process.env.AZURE_OPENAI_PROMPT,
     };
 
+    const maxTokens = process.env.AZURE_OPENAI_MAX_TOKENS || 3000;
+
     const messageHistory = [systemMessage, ...messages];
 
     const response = await axios({
@@ -39,6 +41,7 @@ exports.chatHandler = async (req, res) => {
       },
       data: {
         messages: messageHistory,
+        max_tokens: Number(maxTokens),
         stream: true,
       },
       responseType: 'stream',

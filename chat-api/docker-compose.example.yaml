@@ -11,6 +11,7 @@ services:
       AZURE_OPENAI_DEPLOYMENT_NAME: "<YOUR_DEPLOYMENT_NAME>"
       AZURE_OPENAI_API_VERSION: "2024-06-01"
       AZURE_OPENAI_PROMPT: "please answer only sql convert to pyspark"
+      AZURE_OPENAI_MAX_TOKENS: '4096'
       ALLOWED_FRONTEND_URL: "*"
     volumes:
       - ./mnt:/app/mnt
