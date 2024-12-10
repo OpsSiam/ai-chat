@@ -1,6 +1,7 @@
 const db = require('./database');
 
 db.serialize(() => {
+  db.run('PRAGMA journal_mode = WAL;');
   db.run(`
     CREATE TABLE IF NOT EXISTS sessions (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
