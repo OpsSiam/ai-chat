@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../style/Sidebar.css';
 import Modal from './Modal'; 
-import { format, isToday, isYesterday, subDays } from 'date-fns'; 
-import { FaEdit, FaTrash, FaEllipsisV } from 'react-icons/fa';
+import { isToday, isYesterday, subDays } from 'date-fns'; 
+import { FaEdit, FaTrash} from 'react-icons/fa';
 
 function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onDeleteSession, onRenameSession, isOpen, toggleSidebar }) {
   const [dropdownOpen, setDropdownOpen] = useState(null); 
@@ -44,18 +44,21 @@ function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onD
     };
   }, []);
 
+  useEffect(() => {
+    console.log('Sessions in Sidebar:', sessions);
+  }, [sessions]);
+
   const groupSessionsByTime = (sessions) => {
     const now = new Date();
-    const yesterday = subDays(now, 1);
     const sevenDaysAgo = subDays(now, 7);
     const thirtyDaysAgo = subDays(now, 30);
 
     return {
-      today: sessions.filter(session => isToday(new Date(session.created_at))),
-      yesterday: sessions.filter(session => isYesterday(new Date(session.created_at))),
-      previousSevenDays: sessions.filter(session => new Date(session.created_at) >= sevenDaysAgo && !isToday(new Date(session.created_at)) && !isYesterday(new Date(session.created_at))),
-      previousThirtyDays: sessions.filter(session => new Date(session.created_at) >= thirtyDaysAgo && new Date(session.created_at) < sevenDaysAgo),
-      older: sessions.filter(session => new Date(session.created_at) < thirtyDaysAgo),
+      today: sessions.filter(session => isToday(new Date(session.createdAt))),
+      yesterday: sessions.filter(session => isYesterday(new Date(session.createdAt))),
+      previousSevenDays: sessions.filter(session => new Date(session.createdAt) >= sevenDaysAgo && !isToday(new Date(session.createdAt)) && !isYesterday(new Date(session.createdAt))),
+      previousThirtyDays: sessions.filter(session => new Date(session.createdAt) >= thirtyDaysAgo && new Date(session.createdAt) < sevenDaysAgo),
+      older: sessions.filter(session => new Date(session.createdAt) < thirtyDaysAgo),
     };
   };
 

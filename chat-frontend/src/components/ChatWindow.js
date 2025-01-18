@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Message from './Message';
 import '../style/ChatWindow.css';
 
-function ChatWindow({ messages, apiStatus }) {
+function ChatWindow({ messages }) {
   const chatEndRef = useRef(null);
 
   useEffect(() => {
@@ -10,14 +10,6 @@ function ChatWindow({ messages, apiStatus }) {
       chatEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages]);
-
-  if (!apiStatus) {
-    return (
-      <div className="chat-window">
-        <p className="status-message">Unable to connect to the API. Please check your connection and try again.</p>
-      </div>
-    );
-  }
 
   return (
     <div className="chat-window">

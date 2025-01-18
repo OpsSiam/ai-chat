@@ -9,7 +9,7 @@ exports.createSession = async (req, res) => {
         title,
       },
     });
-    res.json({ id: session.id, title: session.title, created_at: session.createdAt });
+    res.json({ id: session.id, title: session.title, createdAt: session.createdAt });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
