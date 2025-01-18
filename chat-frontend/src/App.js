@@ -12,6 +12,7 @@ function App() {
   const [sessionId, setSessionId] = useState(null);
   const [sessions, setSessions] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [apiStatus, setApiStatus] = useState('Checking...');
 
   useEffect(() => {
     const fetchSessions = async () => {
@@ -23,6 +24,24 @@ function App() {
       }
     };
     fetchSessions();
+  }, []);
+
+  useEffect(() => {
+    const checkApiConnection = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/ping`);
+        if (response.status === 200) {
+          setApiStatus('Connected');
+        } else {
+          setApiStatus('Disconnected');
+        }
+      } catch (error) {
+        setApiStatus('Disconnected');
+      }
+    };
+    checkApiConnection();
+    const interval = setInterval(checkApiConnection, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   const addMessage = (message) => {
@@ -99,12 +118,13 @@ function App() {
           setMessages([]);
           setSessionId(null);
         }}
-        onDeleteSession={onDeleteSession} 
+        onDeleteSession={onDeleteSession}
         onRenameSession={onRenameSession}
         isOpen={isSidebarOpen}
+        apiStatus={apiStatus}
       />
       <div className={`main-content ${isSidebarOpen ? 'shifted' : ''}`}>
-        <ChatWindow messages={messages} />
+        <ChatWindow messages={messages} apiStatus={apiStatus} />
         <MessageInput
           addMessage={addMessage}
           updateLastMessage={updateLastMessage}

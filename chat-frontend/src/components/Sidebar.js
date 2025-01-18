@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import '../style/Sidebar.css';
 import Modal from './Modal'; 
 import { isToday, isYesterday, subDays } from 'date-fns'; 
-import { FaEdit, FaTrash} from 'react-icons/fa';
+import { FaEdit, FaTrash, FaCircle} from 'react-icons/fa';
 
-function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onDeleteSession, onRenameSession, isOpen, toggleSidebar }) {
+function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onDeleteSession, onRenameSession, isOpen, toggleSidebar, apiStatus }) {
   const [dropdownOpen, setDropdownOpen] = useState(null); 
   const [isRenaming, setIsRenaming] = useState(null); 
   const [renameValue, setRenameValue] = useState(''); 
@@ -64,13 +64,38 @@ function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onD
 
   const { today, yesterday, previousSevenDays, previousThirtyDays, older } = groupSessionsByTime(sessions);
 
+  const getStatusIconColor = () => {
+    switch (apiStatus.toLowerCase()) {
+      case 'connected':
+        return 'green'; 
+      case 'disconnected':
+        return 'red'; 
+      case 'checking':
+        return 'orange';
+      default:
+        return 'gray';
+    }
+  };
+
   return (
     <>
       <div className={`sidebar ${isOpen ? 'open' : ''}`}> 
-        <button className="toggle-sidebar-button" onClick={toggleSidebar}>
-          ☰
-        </button>
-
+        <div className="sidebar-header">
+          <button className="toggle-sidebar-button" onClick={toggleSidebar}>
+            ☰
+          </button>
+          <div className="api-status-container">
+            <FaCircle
+              style={{
+                color: getStatusIconColor(),
+                marginLeft: '30px',
+                fontSize: '14px',
+              }}
+              title={`API Status: ${apiStatus}`}
+            />
+            <span className="api-status-text">API {apiStatus}</span>
+          </div>
+        </div>
         <h2>Conversations</h2>
         <button className="new-conversation-button" onClick={onNewSession}>
           New Chat

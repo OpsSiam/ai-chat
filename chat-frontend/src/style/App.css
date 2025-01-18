@@ -23,27 +23,6 @@
   margin-left: 0; 
 }
 
-.sidebar-toggle {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  z-index: 1000;
-}
-
-.sidebar-toggle:hover {
-  background-color: #0056b3;
-}
-
-.hamburger-icon {
-  font-size: 24px;
-}
-
 @media (max-width: 768px) {
   .sidebar {
     display: none; 
