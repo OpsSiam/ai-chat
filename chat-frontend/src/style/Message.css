@@ -1,4 +1,3 @@
-
 .message {
   display: flex;
   margin-bottom: 15px;
@@ -59,149 +58,6 @@
   margin-left: 0;
 }
 
-
-pre {
-  background-color: #2d2d2d;
-  padding: 12px;
-  border-radius: 0 0 12px 12px; 
-  color: #f8f8f2;
-  overflow-x: auto;
-   font-family: 'Roboto', sans-serif;
-  font-weight: 600;
-  margin: 0;
-  box-shadow: none; 
-  white-space: pre-wrap; 
-  word-wrap: break-word;
-}
-
-.message-content pre {
-  background-color: #1e1e1e; 
-  border-radius: 8px; 
-}
-
-
-
-
-.language-javascript code {
-  color: #f1e05a;
-}
-
-
-.language-python code {
-  color: #437cff;
-}
-
-
-.language-java code {
-  color: #b07219;
-}
-
-
-.language-ruby code {
-  color: #701516;
-}
-
-
-.language-go code {
-  color: #00ADD8;
-}
-
-
-.language-html code {
-  color: #e34c26;
-}
-
-
-.language-css code {
-  color: #563d7c;
-}
-
-
-.language-sql code {
-  color: #c586c0;
-}
-
-
-.language-cpp code {
-  color: #f34b7d;
-}
-
-
-.language-csharp code {
-  color: #178600;
-}
-
-
-.language-php code {
-  color: #4F5D95;
-}
-
-
-.language-typescript code {
-  color: #2b7489;
-}
-
-
-.language-shell code {
-  color: #89e051;
-}
-
-
-.language-swift code {
-  color: #ffac45;
-}
-
-
-.language-rust code {
-  color: #dea584;
-}
-
-
-.language-kotlin code {
-  color: #a97bff;
-}
-
-
-.language-perl code {
-  color: #0298c3;
-}
-
-
-.language-dart code {
-  color: #00B4AB;
-}
-
-
-.language-markdown code {
-  color: #083fa1;
-}
-
-
-.language-bash code {
-  color: #89e051;
-}
-
-
-.language-yaml code {
-  color: #cb171e;
-}
-
-
-.language-json code {
-  color: #e44b23;
-}
-
-
-.language-powershell code {
-  color: #4a6bff;
-}
-
-
-.language-sh code {
-  color: #a0e825;
-}
-
-
 .code-snippet-container {
   position: relative; 
   margin: 10px 0;
@@ -219,7 +75,6 @@ pre {
   text-transform: capitalize;
 }
 
-
 .copy-button {
   background-color: #1f1f1f;
   color: #f8f8f2;
@@ -229,10 +84,9 @@ pre {
   cursor: pointer;
   font-size: 12px;
   margin-left: auto; 
-   font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 600;
 }
-
 
 .copy-button:hover {
   background-color: #000000;
@@ -243,7 +97,7 @@ pre {
   color: #4caf50; 
   font-size: 12px;
   margin-left: auto; 
-   font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 600;
 }
 
@@ -252,15 +106,13 @@ pre {
   margin-right: 5px;
 }
 
-
-
 pre {
   background-color: #2d2d2d;
   padding: 12px;
   border-radius: 0 0 12px 12px;
   color: #f8f8f2;
   overflow-x: auto;
-   font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 600;
   margin-top: 0;
   box-shadow: none;
@@ -272,7 +124,6 @@ pre {
   background-color: #0b0b0b;
   border-radius: 8px;
 }
-
 
 .code-header {
   display: flex;
