@@ -9,12 +9,21 @@
   "author": "Data Engineer",
   "license": "Allianz",
   "description": "A AI chat to convert SQL queries to PySpark DataFrame operations.",
-  "keywords": ["sql", "AI", "pyspark", "dataframe", "conversion"],
+  "keywords": [
+    "sql",
+    "AI",
+    "pyspark",
+    "dataframe",
+    "conversion"
+  ],
   "repository": {
     "type": "git",
     "url": ""
   },
   "devDependencies": {
     "concurrently": "^9.0.1"
+  },
+  "dependencies": {
+    "react-syntax-highlighter": "^15.6.1"
   }
 }

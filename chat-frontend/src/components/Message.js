@@ -1,6 +1,7 @@
-
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { xonokai } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import '../style/Message.css';
 import { PiOpenAiLogoThin } from 'react-icons/pi';
 import remarkGfm from 'remark-gfm';
@@ -21,7 +22,6 @@ function Message({ message }) {
   };
 
   const formatMessage = (content, role) => {
-    
     if (role === 'user') {
       return (
         <ReactMarkdown
@@ -29,14 +29,12 @@ function Message({ message }) {
           children={content}
           remarkPlugins={[remarkGfm]} 
           components={{
-            
             p: ({ children }) => <p style={{ margin: 0, whiteSpace: 'pre-wrap' }}>{children}</p>,
           }}
         />
       );
     }
 
-    
     const parts = content.split(/(```[\s\S]*?```)/);
     return parts.map((part, index) => {
       if (part.startsWith('```') && part.endsWith('```')) {
@@ -64,9 +62,9 @@ function Message({ message }) {
                 </button>
               )}
             </div>
-            <pre className={`code-block language-${language}`}>
-              <code>{code}</code>
-            </pre>
+            <SyntaxHighlighter language={language} style={xonokai}>
+              {code}
+            </SyntaxHighlighter>
           </div>
         );
       } else {

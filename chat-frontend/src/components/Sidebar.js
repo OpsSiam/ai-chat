@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../style/Sidebar.css';
 import Modal from './Modal'; 
-import { format, isToday, isYesterday, subDays } from 'date-fns'; 
-import { FaEdit, FaTrash, FaEllipsisV } from 'react-icons/fa';
+import { isToday, isYesterday, subDays } from 'date-fns'; 
+import { FaEdit, FaTrash, FaCircle} from 'react-icons/fa';
 
-function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onDeleteSession, onRenameSession, isOpen, toggleSidebar }) {
+function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onDeleteSession, onRenameSession, isOpen, toggleSidebar, apiStatus }) {
   const [dropdownOpen, setDropdownOpen] = useState(null); 
   const [isRenaming, setIsRenaming] = useState(null); 
   const [renameValue, setRenameValue] = useState(''); 
@@ -44,30 +44,58 @@ function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onD
     };
   }, []);
 
+  useEffect(() => {
+    console.log('Sessions in Sidebar:', sessions);
+  }, [sessions]);
+
   const groupSessionsByTime = (sessions) => {
     const now = new Date();
-    const yesterday = subDays(now, 1);
     const sevenDaysAgo = subDays(now, 7);
     const thirtyDaysAgo = subDays(now, 30);
 
     return {
-      today: sessions.filter(session => isToday(new Date(session.created_at))),
-      yesterday: sessions.filter(session => isYesterday(new Date(session.created_at))),
-      previousSevenDays: sessions.filter(session => new Date(session.created_at) >= sevenDaysAgo && !isToday(new Date(session.created_at)) && !isYesterday(new Date(session.created_at))),
-      previousThirtyDays: sessions.filter(session => new Date(session.created_at) >= thirtyDaysAgo && new Date(session.created_at) < sevenDaysAgo),
-      older: sessions.filter(session => new Date(session.created_at) < thirtyDaysAgo),
+      today: sessions.filter(session => isToday(new Date(session.createdAt))),
+      yesterday: sessions.filter(session => isYesterday(new Date(session.createdAt))),
+      previousSevenDays: sessions.filter(session => new Date(session.createdAt) >= sevenDaysAgo && !isToday(new Date(session.createdAt)) && !isYesterday(new Date(session.createdAt))),
+      previousThirtyDays: sessions.filter(session => new Date(session.createdAt) >= thirtyDaysAgo && new Date(session.createdAt) < sevenDaysAgo),
+      older: sessions.filter(session => new Date(session.createdAt) < thirtyDaysAgo),
     };
   };
 
   const { today, yesterday, previousSevenDays, previousThirtyDays, older } = groupSessionsByTime(sessions);
 
+  const getStatusIconColor = () => {
+    switch (apiStatus.toLowerCase()) {
+      case 'connected':
+        return 'green'; 
+      case 'disconnected':
+        return 'red'; 
+      case 'checking':
+        return 'orange';
+      default:
+        return 'gray';
+    }
+  };
+
   return (
     <>
       <div className={`sidebar ${isOpen ? 'open' : ''}`}> 
-        <button className="toggle-sidebar-button" onClick={toggleSidebar}>
-          ☰
-        </button>
-
+        <div className="sidebar-header">
+          <button className="toggle-sidebar-button" onClick={toggleSidebar}>
+            ☰
+          </button>
+          <div className="api-status-container">
+            <FaCircle
+              style={{
+                color: getStatusIconColor(),
+                marginLeft: '30px',
+                fontSize: '14px',
+              }}
+              title={`API Status: ${apiStatus}`}
+            />
+            <span className="api-status-text">API {apiStatus}</span>
+          </div>
+        </div>
         <h2>Conversations</h2>
         <button className="new-conversation-button" onClick={onNewSession}>
           New Chat

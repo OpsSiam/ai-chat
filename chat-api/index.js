@@ -22,7 +22,7 @@ const sessionRoutes = require('./routes/sessions');
 const { errorHandler } = require('./middleware/errorHandler');
 
 app.use('/api/chat', chatRoutes);
-app.use('/api/healthcheck', healthRoutes);
+app.use('/api/ping', healthRoutes);
 app.use('/api/sessions', sessionRoutes);
 
 app.use(errorHandler);

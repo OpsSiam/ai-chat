@@ -175,16 +175,36 @@
   margin-bottom: 8px; 
 }
 
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
 .toggle-sidebar-button {
   background-color: transparent;
   border: none;
   color: white;
-  font-size: 24px;
+  font-size: 34px;
   cursor: pointer;
   position: absolute;
   top: 10px;
   left: 10px;
   z-index: 1000;
+}
+
+.api-status-container {
+  display: flex;
+  align-items: center; 
+  gap: 8px; 
+}
+
+.api-status-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: #cfcfcf;
+  text-transform: capitalize;
 }
 
 @media screen and (max-width: 768px) {

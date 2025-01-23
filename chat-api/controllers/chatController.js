@@ -1,5 +1,5 @@
 const axios = require('axios');
-const db = require('../db/database');
+const prisma = require('../prisma');
 require('dotenv').config();
 
 exports.chatHandler = async (req, res) => {
@@ -8,20 +8,20 @@ exports.chatHandler = async (req, res) => {
   try {
     const userMessage = messages[messages.length - 1];
 
-    messages.forEach(message => {
-      if (message.content.startsWith('Uploaded file:')) {
-        const firstLine = message.content.split('\n')[0];
-        db.run(
-          'INSERT INTO messages (session_id, role, content) VALUES (?, ?, ?)',
-          [sessionId, message.role, firstLine]
-        );
-      } else {
-        db.run(
-          'INSERT INTO messages (session_id, role, content) VALUES (?, ?, ?)',
-          [sessionId, message.role, message.content]
-        );
-      }
-    });
+    for (const message of messages) {
+      const content =
+        message.content.startsWith('Uploaded file:')
+          ? message.content.split('\n')[0]
+          : message.content;
+
+      await prisma.message.create({
+        data: {
+          sessionId: sessionId,
+          role: message.role,
+          content: content,
+        },
+      });
+    }
 
     const systemMessage = {
       role: 'system',
@@ -85,11 +85,14 @@ exports.chatHandler = async (req, res) => {
       }
     });
 
-    response.data.on('end', () => {
-      db.run(
-        'INSERT INTO messages (session_id, role, content) VALUES (?, ?, ?)',
-        [sessionId, 'assistant', assistantContent]
-      );
+    response.data.on('end', async () => {
+      await prisma.message.create({
+        data: {
+          sessionId: sessionId,
+          role: 'assistant',
+          content: assistantContent,
+        },
+      });
       res.write('data: [DONE]\n\n');
       res.end();
     });
@@ -98,30 +101,35 @@ exports.chatHandler = async (req, res) => {
       console.error('Streaming error:', err);
       res.end();
     });
-
   } catch (error) {
     console.error(error.response ? error.response.data : error.message);
     res.status(500).send('Error processing the request');
   }
 };
 
-exports.getMessages = (req, res) => {
+exports.getMessages = async (req, res) => {
   const sessionId = req.params.sessionId;
 
-  db.all(
-    'SELECT role, content, created_at FROM messages WHERE session_id = ? ORDER BY created_at ASC',
-    [sessionId],
-    (err, rows) => {
-      if (err) {
-        console.error('Error fetching messages:', err.message);
-        res.status(500).json({ error: err.message });
-      } else if (rows.length === 0) {
-        console.log(`No messages found for session ID: ${sessionId}`);
-        res.status(404).json({ error: 'No messages found for this session' });
-      } else {
-        console.log(`Fetched messages for session ID: ${sessionId}`);
-        res.json(rows);
-      }
+  try {
+    const messages = await prisma.message.findMany({
+      where: { sessionId: Number(sessionId) },
+      orderBy: { createdAt: 'asc' },
+      select: {
+        role: true,
+        content: true,
+        createdAt: true,
+      },
+    });
+
+    if (messages.length === 0) {
+      console.log(`No messages found for session ID: ${sessionId}`);
+      return res.status(404).json({ error: 'No messages found for this session' });
     }
-  );
+
+    console.log(`Fetched messages for session ID: ${sessionId}`);
+    res.json(messages);
+  } catch (error) {
+    console.error('Error fetching messages:', error.message);
+    res.status(500).json({ error: error.message });
+  }
 };
